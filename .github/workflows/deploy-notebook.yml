@@ -21,7 +21,7 @@ jobs:
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
         NOTEBOOK_BASE="/Workspace/Users/jorgluis1402@hotmail.com/Project/Reversiones"
-        NOTEBOOKS=("Revoke")  # Agrega más según necesitesas
+        NOTEBOOKS=("Revoke")  # Agrega más según necesitas
 
         mkdir -p notebooks_to_deploy
 
