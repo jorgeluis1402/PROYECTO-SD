@@ -121,147 +121,77 @@ jobs:
         echo "Creando workflow: WF_ADB con cluster existente ID: $CLUSTER_ID"
         
         # Crear el JSON del workflow usando cluster existente
-        cat > workflow_config.json << EOF
+ cat > workflow_config.json << EOF
         {
           "name": "WF_ADB",
           "format": "MULTI_TASK",
           "tasks": [
             {
               "task_key": "preparacion_ambiente",
-              "description": "Ejecuta notebook preparacion_ambiente con parámetros",
               "notebook_task": {
                 "notebook_path": "/py/scripts/main/preparacion_ambiente",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "storageLocation": "storage"
-                }
+                "source": "WORKSPACE"
               },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2
+              "existing_cluster_id": "$CLUSTER_ID"
             },
             {
               "task_key": "extrac_clinic_workers",
-              "description": "Ejecuta notebook extrac_clinic_workers con parámetros",
+              "depends_on": [
+                { "task_key": "preparacion_ambiente" }
+              ],
               "notebook_task": {
                 "notebook_path": "/py/scripts/main/extrac_clinic_workers",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
-                }
+                "source": "WORKSPACE"
               },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2,
-              "depends_on": [
-                {
-                  "task_key": "preparacion_ambiente"
-                }
-              ]
+              "existing_cluster_id": "$CLUSTER_ID"
             },
             {
               "task_key": "extrac_clinic_profession",
-              "description": "Ejecuta notebook extrac_clinic_professions con parámetros",
-              "notebook_task": {
-                "notebook_path": "/py/scripts/main/extrac_clinic_professions",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
-                }
-              },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2,
               "depends_on": [
-                {
-                  "task_key": "preparacion_ambiente"
-                }
-              ]
-            },{
+                { "task_key": "preparacion_ambiente" }
+              ],
+              "notebook_task": {
+                "notebook_path": "/py/scripts/main/extrac_clinic_profession",
+                "source": "WORKSPACE"
+              },
+              "existing_cluster_id": "$CLUSTER_ID"
+            },
+            {
               "task_key": "extrac_clinic_turn",
-              "description": "Ejecuta notebook extrac_clinic_turn con parámetros",
+              "depends_on": [
+                { "task_key": "preparacion_ambiente" }
+              ],
               "notebook_task": {
                 "notebook_path": "/py/scripts/main/extrac_clinic_turn",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
-                }
+                "source": "WORKSPACE"
               },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2,
-              "depends_on": [
-                {
-                  "task_key": "preparacion_ambiente"
-                }
-              ]
-            },{
+              "existing_cluster_id": "$CLUSTER_ID"
+            },
+            {
               "task_key": "Transform",
-              "description": "Ejecuta notebook Transform con parámetros",
+              "depends_on": [
+                { "task_key": "extrac_clinic_workers" },
+                { "task_key": "extrac_clinic_profession" },
+                { "task_key": "extrac_clinic_turn" }
+              ],
               "notebook_task": {
                 "notebook_path": "/py/scripts/main/Transform",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
-                }
+                "source": "WORKSPACE"
               },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2,
+              "existing_cluster_id": "$CLUSTER_ID"
+            },
+            {
+              "task_key": "Load",
               "depends_on": [
-                {
-                  "task_key": "extrac_clinic_workers" "extrac_clinic_profession" "extrac_clinic_turn" 
-                }
-              ]
-            },{
-              "task_key": "Load"",
-              "description": "Ejecuta notebook Load" con parámetros",
+                { "task_key": "Transform" }
+              ],
               "notebook_task": {
                 "notebook_path": "/py/scripts/main/Load",
-                "source": "WORKSPACE",
-                "base_parameters": {
-                  "inputPath": "/data/input",
-                  "outputPath": "/data/output",
-                  "processDate": "$(date +%Y-%m-%d)"
-                }
+                "source": "WORKSPACE"
               },
-              "existing_cluster_id": "$CLUSTER_ID",
-              "timeout_seconds": 3600,
-              "max_retries": 2,
-              "depends_on": [
-                {
-                  "task_key": "Transform"
-                }
-              ]
+              "existing_cluster_id": "$CLUSTER_ID"
             }
-          ],
-          "schedule": {
-            "quartz_cron_expression": "0 0 8 * * ?",
-            "timezone_id": "America/Lima",
-            "pause_status": "PAUSED"
-          },
-          "email_notifications": {
-            "on_failure": [],
-            "on_success": [],
-            "no_alert_for_skipped_runs": false
-          },
-          "webhook_notifications": {},
-          "timeout_seconds": 7200,
-          "max_concurrent_runs": 1,
-          "tags": {
-            "environment": "production",
-            "created_by": "github_actions",
-            "project": "automated_deployment",
-            "cluster_used": "cluster_SD"
-          }
+          ]
         }
         EOF
         
