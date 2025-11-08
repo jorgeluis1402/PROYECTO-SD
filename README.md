@@ -38,7 +38,7 @@ Bronze            	Datos crudos desde landing/raw
 Silver            	Limpieza, tipado y estandarización	
 Gold	              Modelos para analítica y reporting	
 
-## 🛠️ Tecnologías
+## 🛠️ Tecnologías Utilizadas
 
 <div align="center">
 
