@@ -75,12 +75,13 @@ clinic-medic-salud-etl/
 │   └── databricks-deploy.yml    ← CI/CD automático
 │
 ├── proceso/
-│   ├── 1-Ddls-Medallion.sql      ← Creación de esquema
-│   ├── 2-Ingest.py               ← Bronze Layer
-│   ├── 3-Transform.py            ← Silver Layer
-│   └── 4-Load.py                 ← Gold Layer
+│   ├── 1-Ddls-Medallion.sql    ← Creación de esquema
+│   ├── 2-Ingest.py               ← Bronze: ingesta raw
+│   ├── 3-Transform.py            ← Silver: modelo clínico
+│   └── 4-Load.py                 ← Gold: métricas
 │
 └── README.md
+
 
 📊 Modelo de Datos (Silver – Star Schema)
            DIM_PROFESION
