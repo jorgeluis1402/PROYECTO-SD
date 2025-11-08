@@ -95,7 +95,7 @@ clinic medic+salud -etl/
 │
 ├── 📂 proceso/
 │   ├── 📄 1-environment preparation.sql         # Creación de esquema
-│   ├── 🐍 2-Ingest-Coffee-Shop-Data.py          # Bronze Layer
+│   ├── 🐍 2-Ingest.py                           # Bronze Layer
 │   ├── 🐍 3-Transform.py                        # Silver Layer
 │   └── 🐍 4-Load.py                             # Gold Layer
 │
