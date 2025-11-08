@@ -48,24 +48,21 @@ Implementa la Arquitectura Medallón con Delta Lake para garantizar calidad del 
 
 ## 📂 Datos Utilizados
 
-Dataset	                     Descripción	      Registros
-
-clinic_workers.csv	Trabajadores clínicos	        50
-
-clinic_profession.csv	Especialidades médicas	        8
-
-clinic_turn.csv	        Turnos asignados	        3
+| Dataset                 | Descripción            | Registros |
+| ----------------------- | ---------------------- | :-------: |
+| `clinic_workers.csv`    | Trabajadores clínicos  |     50    |
+| `clinic_profession.csv` | Especialidades médicas |     8     |
+| `clinic_turn.csv`       | Turnos asignados       |     3     |
 
 
 ## 📦 Capas del Pipeline
 
-Capa	        Propósito	               Ejemplo de Tablas
+| Capa       | Propósito                  | Ejemplo de Tablas                                                   |
+| ---------- | -------------------------- | ------------------------------------------------------------------- |
+| **Bronze** | Aterrizaje de datos crudos | `bronze.clinic_workers,bronze.clinic_profession,clinic_bronze.turn` |
+| **Silver** | Limpieza + Modelado        | ` clinic_transformed`                                               |
+| **Gold**   | Métricas para BI           | `clinic_gold`                                                       |
 
-Bronze	        Aterrizaje de datos crudos	bronze.clinic_workers,bronze.clinic_profession,clinic_bronze.turn
-
-Silver	        Limpieza + Modelado	        clinic_transformed
-
-Gold	        Métricas         	        clinic_gold
 
 
 
