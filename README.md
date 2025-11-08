@@ -125,11 +125,14 @@ Corre ETL: Bronze → Silver → Gold
 
 📈 Visualización del Gold Layer
 
-✅ Resultados
+## ✅ Resultados
 
 Datos unificados por trabajador, especialidad y turno
+
 Creación de modelos para análisis de RRHH clínico
+
 Dashboard visual listo para gestión de personal
+
 
 
 👨‍💻 Autor
