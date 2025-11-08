@@ -1,6 +1,7 @@
 <div align="center">
 
-#  Clinica MEDIC+SALUD ETL Pipeline
+##  Clinica MEDIC+SALUD ETL Pipeline
+
 ### Arquitectura Medallion en Azure Databricks
 
 [![Databricks](https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white)](https://databricks.com/)
@@ -15,7 +16,7 @@
 </div>
 
 
-🎯 Descripción del Proyecto
+## 🎯 Descripción del Proyecto
 
 Este proyecto desarrolla un pipeline ETL en Azure Databricks para la clínica MEDIC+SALUD, transformando datos operativos (personal y turnos médicos) en información estructurada lista para analítica y tableros clínicos.
 
