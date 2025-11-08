@@ -1,0 +1,437 @@
+{
+  "datasets": [
+    {
+      "name": "ccdd70ab",
+      "displayName": "clinic_gold",
+      "queryLines": [
+        "SELECT * FROM project_etl.gold.clinic_gold"
+      ]
+    },
+    {
+      "name": "2f23c449",
+      "displayName": "profession",
+      "queryLines": [
+        "SELECT * FROM project_etl.bronze.profession"
+      ]
+    },
+    {
+      "name": "d0312e10",
+      "displayName": "turn",
+      "queryLines": [
+        "SELECT * FROM project_etl.bronze.turn"
+      ]
+    },
+    {
+      "name": "26a04c93",
+      "displayName": "workers",
+      "queryLines": [
+        "SELECT * FROM project_etl.bronze.workers"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "5b267d71",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "480edf27",
+            "multilineTextboxSpec": {
+              "lines": [
+                "<span style=\"text-align:center;display:block\"><span style=\"color:#FF3621;text-decoration:underline;font-size:48px;line-height:1.5\">**CLINICA&#32;**</span></span>\n",
+                "\n",
+                "<span style=\"text-align:center;display:block\"><span style=\"color:#FF3621;text-decoration:underline;font-size:48px;line-height:1.5\">**MEDIC+</span><span style=\"color:#FF3621;text-decoration:underline;font-size:48px;line-height:1.5\">SALUD**</span></span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "professions-by-department",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "2f23c449",
+                  "fields": [
+                    {
+                      "name": "count(departamento)",
+                      "expression": "COUNT(`departamento`)"
+                    },
+                    {
+                      "name": "departamento",
+                      "expression": "`departamento`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "count(departamento)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "departamento",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "title": "DEPARTAMENTOS MEDICOS",
+                "showTitle": true,
+                "showDescription": true,
+                "description": ""
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "turno-names",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d0312e10",
+                  "fields": [
+                    {
+                      "name": "nombre_turno",
+                      "expression": "`nombre_turno`"
+                    },
+                    {
+                      "name": "inicio_horario",
+                      "expression": "`inicio_horario`"
+                    },
+                    {
+                      "name": "fin_horario",
+                      "expression": "`fin_horario`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "nombre_turno",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "nombre_turno",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "inicio_horario",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100002,
+                    "title": "inicio_horario",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "fin_horario",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100003,
+                    "title": "fin_horario",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [
+                {
+                  "numberFormat": "0",
+                  "booleanValues": [
+                    "false",
+                    "true"
+                  ],
+                  "imageUrlTemplate": "{{ @ }}",
+                  "imageTitleTemplate": "{{ @ }}",
+                  "imageWidth": "",
+                  "imageHeight": "",
+                  "linkUrlTemplate": "{{ @ }}",
+                  "linkTextTemplate": "{{ @ }}",
+                  "linkTitleTemplate": "{{ @ }}",
+                  "linkOpenInNewTab": true,
+                  "name": "id_turno",
+                  "type": "integer",
+                  "displayAs": "number",
+                  "order": 100000,
+                  "title": "id_turno",
+                  "allowSearch": false,
+                  "alignContent": "right",
+                  "allowHTML": false,
+                  "highlightLinks": false,
+                  "useMonospaceFont": false,
+                  "preserveWhitespace": false
+                }
+              ],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "title": "Turno Names",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "total-workers-by-department-1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ccdd70ab",
+                  "fields": [
+                    {
+                      "name": "DEPARTAMENTO",
+                      "expression": "`DEPARTAMENTO`"
+                    },
+                    {
+                      "name": "count(TOTAL_TRABAJADORES)",
+                      "expression": "COUNT(`TOTAL_TRABAJADORES`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "DEPARTAMENTO",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "count(TOTAL_TRABAJADORES)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "",
+                "showTitle": true
+              },
+              "mark": {
+                "colors": [
+                  "#B5FCA1",
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "profession-distribution-by-department-1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ccdd70ab",
+                  "fields": [
+                    {
+                      "name": "DEPARTAMENTO",
+                      "expression": "`DEPARTAMENTO`"
+                    },
+                    {
+                      "name": "CATEGORIA_TURNO",
+                      "expression": "`CATEGORIA_TURNO`"
+                    },
+                    {
+                      "name": "sum(TOTAL_TRABAJADORES)",
+                      "expression": "SUM(`TOTAL_TRABAJADORES`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "CATEGORIA_TURNO",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(TOTAL_TRABAJADORES)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "DEPARTAMENTO",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "title": "",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
