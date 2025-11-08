@@ -23,15 +23,20 @@ Este proyecto desarrolla un pipeline ETL en Azure Databricks para la clínica ME
 Implementa la Arquitectura Medallón con Delta Lake para garantizar calidad del dato, auditoría, versionamiento y consistencia ACID.
 
 ##✨ Objetivos
-Objetivo
+Objetivo                                        
 
 **Centralizar datos operativos de clínica	✅
+
 **Automatizar ingestión y transformación	✅
+
 **Optimizar calidad del dato	                ✅
+
 **Habilitar reporting y dashboards médicos	✅
 
 ##🏗️ Arquitectura
-📌 Flujo ETL
+
+##📌 Flujo ETL
+
 📄 CSV en Data Lake (RAW)
         ↓
 🥉 Bronze → Ingesta sin cambios
