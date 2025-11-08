@@ -14,9 +14,6 @@
 </div>
 
 
-🏥 PROYECTO-SD — ETL Clínica Medic+Salud
-
-📊 Arquitectura Medallón en Azure Databricks
 
 📌 Descripción del Proyecto
 
@@ -39,6 +36,33 @@ Capa	                      Propósito	Productos
 Bronze            	Datos crudos desde landing/raw	
 Silver            	Limpieza, tipado y estandarización	
 Gold	              Modelos para analítica y reporting	
+
+## 🛠️ Tecnologías
+
+<div align="center">
+
+| Tecnología | Propósito |
+|:----------:|:----------|
+| ![Databricks](https://img.shields.io/badge/Azure_Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white) | Motor de procesamiento distribuido Spark |
+| ![Delta Lake](https://img.shields.io/badge/Delta_Lake-00ADD8?style=flat-square&logo=delta&logoColor=white) | Storage layer con ACID transactions |
+| ![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=flat-square&logo=apache-spark&logoColor=white) | Framework de transformación de datos |
+| ![ADLS](https://img.shields.io/badge/ADLS_Gen2-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white) | Data Lake para almacenamiento persistente |
+| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white) | Automatización CI/CD |
+
+
+</div>
+
+---
+
+## ⚙️ Requisitos Previos
+
+- ☁️ Cuenta de Azure con acceso a Databricks
+- 💻 Workspace de Databricks configurado
+- 🖥️ Cluster activo (nombre: `cluster_SD`)
+- 🐙 Cuenta de GitHub con permisos de administrador
+- 📦 Azure Data Lake Storage Gen2 configurado
+
+
 
 🛠️ Tecnologías Utilizadas
 
@@ -67,6 +91,26 @@ clinic_turn.csv	            Turnos de trabajo	3
 2️⃣ Limpieza y normalización → Silver
 3️⃣ Joins + métricas clínicas → Gold
 4️⃣ Exportación a dashboards
+
+
+## 📁 Estructura del Proyecto
+
+```
+clinic medic+salud -etl/
+│
+├── 📂 .github/
+│   └── 📂 workflows/
+│       └── 📄 databricks-deploy.yml    # Pipeline CI/CD
+│
+├── 📂 proceso/
+│   ├── 📄 1-environment preparation.sql         # Creación de esquema
+│   ├── 🐍 2-Ingest-Coffee-Shop-Data.py          # Bronze Layer
+│   ├── 🐍 3-Transform.py                        # Silver Layer
+│   └── 🐍 4-Load.py                             # Gold Layer
+│
+└── 📄 README.md
+```
+
 
 ✅ Resultados
 
