@@ -25,39 +25,55 @@ Implementa la Arquitectura Medallón con Delta Lake para garantizar calidad del 
 ##✨ Objetivos
 Objetivo                                        
 
-**Centralizar datos operativos de clínica	✅
+        Centralizar datos operativos de clínica	        ✅
 
-**Automatizar ingestión y transformación	✅
+        Automatizar ingestión y transformación	        ✅
 
-**Optimizar calidad del dato	                ✅
+        Optimizar calidad del dato	                ✅
 
-**Habilitar reporting y dashboards médicos	✅
+        Habilitar reporting y dashboards médicos	✅
 
 ##🏗️ Arquitectura
 
 ##📌 Flujo ETL
 
-📄 CSV en Data Lake (RAW)
-        ↓
-🥉 Bronze → Ingesta sin cambios
-        ↓
-🥈 Silver → Limpieza y modelo dimensional
-        ↓
-🥇 Gold → Métricas para dashboards
-        ↓
-📊 Databricks SQL Dashboards
+        📄 CSV en Data Lake (RAW)
+                ↓
+        🥉 Bronze → Ingesta sin cambios
+                ↓
+        🥈 Silver → Limpieza y modelo dimensional
+                ↓
+        🥇 Gold → Métricas para dashboards
+                ↓
+        📊 Databricks SQL Dashboards
 
-📂 Datos Utilizados
-Dataset	Descripción	Registros
-clinic_workers.csv	Trabajadores clínicos	50
-clinic_profession.csv	Especialidades médicas	8
-clinic_turn.csv	Turnos asignados	3
-📦 Capas del Pipeline
-Capa	Propósito	Ejemplo de Tablas
-Bronze	Aterrizaje de datos crudos	bronze.workers_raw
-Silver	Limpieza + Modelado	silver.trabajador, silver.profesion, silver.turno
-Gold	Métricas para BI	gold.staff_dashboard
-📁 Estructura del Repositorio
+
+## 📂 Datos Utilizados
+
+Dataset	                     Descripción	      Registros
+
+clinic_workers.csv	Trabajadores clínicos	        50
+
+clinic_profession.csv	Especialidades médicas	        8
+
+clinic_turn.csv	        Turnos asignados	        3
+
+
+## 📦 Capas del Pipeline
+
+Capa	        Propósito	               Ejemplo de Tablas
+
+Bronze	        Aterrizaje de datos crudos	bronze.clinic_workers,bronze.clinic_profession,clinic_bronze.turn
+
+Silver	        Limpieza + Modelado	        clinic_transformed
+
+Gold	        Métricas         	        clinic_gold
+
+
+
+
+## 📁 Estructura del Repositorio
+
 clinic-medic-salud-etl/
 │
 ├── .github/workflows/
