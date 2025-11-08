@@ -66,17 +66,6 @@ Gold	              Modelos para analítica y reporting
 
 
 
-🛠️ Tecnologías Utilizadas
-
-  Área	                                Tecnologías
-  =======================================================
-Cloud & Data Lake	          Azure Storage Account, Azure Containers
-Procesamiento	              Azure Databricks — PySpark / SQL
-Gestión	                    Unity Catalog, Delta Lake
-Control de versiones	      GitHub
-Visualización	              Dashboard 
-
-
 📂 Datos utilizados
 
 Se cargaron 3 archivos CSV originales en el contenedor raw del Data Lake:
