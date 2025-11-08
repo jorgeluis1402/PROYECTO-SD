@@ -66,62 +66,52 @@ Implementa la Arquitectura Medallón con Delta Lake para garantizar calidad del 
 
 
 
+## 📁 Estructura del Proyecto
 
-## 📁 Estructura del Repositorio
-
+```
 clinic-medic-salud-etl/
 │
-├── .github/workflows/
-│   └── databricks-deploy.yml    ← CI/CD automático
+├── 📂 .github/
+│   └── 📂 workflows/
+│       └── 📄 databricks-deploy.yml    # CI/CD automático
 │
-├── proceso/
-│   ├── 1-Ddls-Medallion.sql    ← Creación de esquema
-│   ├── 2-Ingest.py               ← Bronze: ingesta raw
-│   ├── 3-Transform.py            ← Silver: modelo clínico
-│   └── 4-Load.py                 ← Gold: métricas
+├── 📂 proceso/
+│   ├── 📄 1-Ddls-Medallion.sql         # Creación de esquema
+│   ├── 🐍 2-Ingest-Coffee-Shop-Data.py # Bronze Layer
+│   ├── 🐍 3-Transform.py                # Silver Layer
+│   └── 🐍 4-Load.py                     # Gold Layer
 │
-└── README.md
+└── 📄 README.md
+```
+
+## 🛠️ Tecnologías
+
+<div align="center">
+
+| Tecnología | Propósito |
+|:----------:|:----------|
+| ![Databricks](https://img.shields.io/badge/Azure_Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white) | Motor de procesamiento distribuido Spark |
+| ![Delta Lake](https://img.shields.io/badge/Delta_Lake-00ADD8?style=flat-square&logo=delta&logoColor=white) | Storage layer con ACID transactions |
+| ![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=flat-square&logo=apache-spark&logoColor=white) | Framework de transformación de datos |
+| ![ADLS](https://img.shields.io/badge/ADLS_Gen2-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white) | Data Lake para almacenamiento persistente |
+| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white) | Automatización CI/CD |
+| ![Dashboard](https://img.shields.io/badge/Dashboard-Azure%20Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white)| Visualización |
+
+</div>
+
+---
 
 
-📊 Modelo de Datos (Silver – Star Schema)
-           DIM_PROFESION
-                |
-                |
-DIM_TURNO — HECHO_TRABAJADOR — (futuro) DIM_AREA
-                |
-           (Fact Table Clínica)
 
-✅ HECHO_TRABAJADOR
-Campo	Tipo	Descripción
-id_trabajador	INT	Identificador del trabajador
-id_profesion	INT	Especialidad médica (FK)
-id_turno	INT	Turno asignado (FK)
-salario	DOUBLE	Sueldo mensual
-fecha_procesamiento	TIMESTAMP	Auditoría
-✅ DIM_PROFESION
-Campo	Descripción
-id_profesion	PK
-nombre_profesion	Médico, cirujano, etc.
-✅ DIM_TURNO
-Campo	Descripción
-id_turno	PK
-horario	Mañana, Tarde, Noche
-🛠️ Tecnologías
-Tecnología	Función
-Azure Databricks	Motor de ejecución
-Delta Lake	ACID + versionamiento
-PySpark	Transformaciones
-ADLS Gen2	Data Lake
-GitHub Actions	CI/CD
-SQL Dashboards	Visualización
-🚀 Ejecución
+## 🚀 Ejecución
+
 🔄 Despliegue Automático CI/CD
 git add .
 git commit -m "update: nuevas reglas transformación clínica"
 git push origin main
 
 
-✅ GitHub Actions:
+## ✅ GitHub Actions:
 
 Exporta notebooks
 
