@@ -15,93 +15,143 @@
 </div>
 
 
+🎯 Descripción del Proyecto
 
-📌 Descripción del Proyecto
+Este proyecto desarrolla un pipeline ETL en Azure Databricks para la clínica MEDIC+SALUD, transformando datos operativos (personal y turnos médicos) en información estructurada lista para analítica y tableros clínicos.
 
-Este proyecto desarrolla un pipeline ETL para la clínica Medic+Salud, con el objetivo de transformar datos operativos en información estructurada y disponible para análisis y generación de dashboards.
+Implementa la Arquitectura Medallón con Delta Lake para garantizar calidad del dato, auditoría, versionamiento y consistencia ACID.
 
-Se utiliza la arquitectura Medallón (Bronze – Silver – Gold) para gestionar y optimizar la calidad del dato dentro de un Data Lake en Azure.
+✨ Objetivos
+Objetivo	Estado
+Centralizar datos operativos de clínica	✅
+Automatizar ingestión y transformación	✅
+Optimizar calidad del dato	✅
+Habilitar reporting y dashboards médicos	✅
+🏗️ Arquitectura
+📌 Flujo ETL
+📄 CSV en Data Lake (RAW)
+        ↓
+🥉 Bronze → Ingesta sin cambios
+        ↓
+🥈 Silver → Limpieza y modelo dimensional
+        ↓
+🥇 Gold → Métricas para dashboards
+        ↓
+📊 Databricks SQL Dashboards
 
-✅ Objetivos Principales
+📂 Datos Utilizados
+Dataset	Descripción	Registros
+clinic_workers.csv	Trabajadores clínicos	50
+clinic_profession.csv	Especialidades médicas	8
+clinic_turn.csv	Turnos asignados	3
+📦 Capas del Pipeline
+Capa	Propósito	Ejemplo de Tablas
+Bronze	Aterrizaje de datos crudos	bronze.workers_raw
+Silver	Limpieza + Modelado	silver.trabajador, silver.profesion, silver.turno
+Gold	Métricas para BI	gold.staff_dashboard
+📁 Estructura del Repositorio
+clinic-medic-salud-etl/
+│
+├── .github/workflows/
+│   └── databricks-deploy.yml    ← CI/CD automático
+│
+├── proceso/
+│   ├── 1-Ddls-Medallion.sql      ← Creación de esquema
+│   ├── 2-Ingest.py               ← Bronze Layer
+│   ├── 3-Transform.py            ← Silver Layer
+│   └── 4-Load.py                 ← Gold Layer
+│
+└── README.md
 
-Centralizar datos de la clínica en una estructura confiable
-Automatizar la ingestión y transformación de datos
-Preparar información para analítica y visualización avanzada
-Garantizar calidad y trazabilidad del dato
+📊 Modelo de Datos (Silver – Star Schema)
+           DIM_PROFESION
+                |
+                |
+DIM_TURNO — HECHO_TRABAJADOR — (futuro) DIM_AREA
+                |
+           (Fact Table Clínica)
 
-🧱 Arquitectura del Proyecto
+✅ HECHO_TRABAJADOR
+Campo	Tipo	Descripción
+id_trabajador	INT	Identificador del trabajador
+id_profesion	INT	Especialidad médica (FK)
+id_turno	INT	Turno asignado (FK)
+salario	DOUBLE	Sueldo mensual
+fecha_procesamiento	TIMESTAMP	Auditoría
+✅ DIM_PROFESION
+Campo	Descripción
+id_profesion	PK
+nombre_profesion	Médico, cirujano, etc.
+✅ DIM_TURNO
+Campo	Descripción
+id_turno	PK
+horario	Mañana, Tarde, Noche
+🛠️ Tecnologías
+Tecnología	Función
+Azure Databricks	Motor de ejecución
+Delta Lake	ACID + versionamiento
+PySpark	Transformaciones
+ADLS Gen2	Data Lake
+GitHub Actions	CI/CD
+SQL Dashboards	Visualización
+🚀 Ejecución
+🔄 Despliegue Automático CI/CD
+git add .
+git commit -m "update: nuevas reglas transformación clínica"
+git push origin main
 
-🔹 Diseño Medallón
-Capa	                      Propósito	Productos
-======================================================
-Bronze            	Datos crudos desde landing/raw	
-Silver            	Limpieza, tipado y estandarización	
-Gold	              Modelos para analítica y reporting	
 
-## 🛠️ Tecnologías Utilizadas
+✅ GitHub Actions:
 
+Exporta notebooks
+
+Ejecuta workflow en Databricks
+
+Corre ETL: Bronze → Silver → Gold
+
+▶️ Ejecución Manual en Databricks
+
+Orden recomendado:
+
+1️⃣ 1-1-Ddls-Medallion.sql    → Crear estructura
+2️⃣ 2-Ingest.py               → Ingesta a Bronze
+3️⃣ 3-Transform.py            → Silver
+4️⃣ 4-Load.py                 → Gold
+
+📈 Visualización del Gold Layer
+
+Actualmente se conectan dashboards desde:
+
+✅ Databricks SQL Dashboards
+
+⏳ Power BI (en iteración futura)
+
+KPIs iniciales:
+
+KPI	Objetivo
+Distribución de especialidades	Análisis de capacidad
+Staff por franja horaria	Planificación operativa
+Relación sueldo vs. especialidad	Optimización del gasto
+🧩 Próximas Extensiones
+
+✅ Relacionar trabajadores → pacientes → atenciones
+🚧 KPI: productividad por médico
+🚧 Integración historizada de planillas
+🚧 Power BI con DirectQuery
+
+👨‍💻 Autor
 <div align="center">
+Jorge Luis Atalaya Alva
 
-| Tecnología | Propósito |
-|:----------:|:----------|
-| ![Databricks](https://img.shields.io/badge/Azure_Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white) | Motor de procesamiento distribuido Spark |
-| ![Delta Lake](https://img.shields.io/badge/Delta_Lake-00ADD8?style=flat-square&logo=delta&logoColor=white) | Storage layer con ACID transactions |
-| ![PySpark](https://img.shields.io/badge/PySpark-E25A1C?style=flat-square&logo=apache-spark&logoColor=white) | Framework de transformación de datos |
-| ![ADLS](https://img.shields.io/badge/ADLS_Gen2-0078D4?style=flat-square&logo=microsoft-azure&logoColor=white) | Data Lake para almacenamiento persistente |
-| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white) | Automatización CI/CD |
-| ![Dashboard](https://img.shields.io/badge/Dashboard-Azure%20Databricks-FF3621?style=flat-square&logo=databricks&logoColor=white) | Visualización |
 
+
+
+Data Engineering | Azure Databricks | Delta Lake | CI/CD
 
 </div>
+📝 Licencia
 
----
-
-## ⚙️ Requisitos Previos
-
-- ☁️ Cuenta de Azure con acceso a Databricks
-- 💻 Workspace de Databricks configurado
-- 🖥️ Cluster activo (nombre: `cluster_SD`)
-- 🐙 Cuenta de GitHub con permisos de administrador
-- 📦 Azure Data Lake Storage Gen2 configurado
-
-
-
-📂 Datos utilizados
-
-Se cargaron 3 archivos CSV originales en el contenedor raw del Data Lake:
-
-Dataset                    	Descripción	Registros
-clinic_works.csv	          Trabajadores de la clínica	50
-clinic_profession.csv      	Especialidades médicas	8
-clinic_turn.csv	            Turnos de trabajo	3
-
-
-🔄 Flujo ETL
-
-1️⃣ Ingesta desde Azure Storage → Bronze
-2️⃣ Limpieza y normalización → Silver
-3️⃣ Joins + métricas clínicas → Gold
-4️⃣ Exportación a dashboards
-
-
-## 📁 Estructura del Proyecto
-
-```
-clinic medic+salud -etl/
-│
-├── 📂 .github/
-│   └── 📂 workflows/
-│       └── 📄 databricks-deploy.yml    # Pipeline CI/CD
-│
-├── 📂 proceso/
-│   ├── 📄 1-environment preparation.sql         # Creación de esquema
-│   ├── 🐍 2-Ingest.py                           # Bronze Layer
-│   ├── 🐍 3-Transform.py                        # Silver Layer
-│   └── 🐍 4-Load.py                             # Gold Layer
-│
-└── 📄 README.md
-```
-
+Proyecto bajo licencia MIT.
 
 ✅ Resultados
 
