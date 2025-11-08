@@ -106,48 +106,31 @@ clinic-medic-salud-etl/
 ## 🚀 Ejecución
 
 🔄 Despliegue Automático CI/CD
+
 git add .
+
 git commit -m "update: nuevas reglas transformación clínica"
+
 git push origin main
+
 
 
 ## ✅ GitHub Actions:
 
 Exporta notebooks
 
-Ejecuta workflow en Databricks
+Ejecuta workflow en Databrick
 
 Corre ETL: Bronze → Silver → Gold
 
-▶️ Ejecución Manual en Databricks
-
-Orden recomendado:
-
-1️⃣ 1-1-Ddls-Medallion.sql    → Crear estructura
-2️⃣ 2-Ingest.py               → Ingesta a Bronze
-3️⃣ 3-Transform.py            → Silver
-4️⃣ 4-Load.py                 → Gold
-
 📈 Visualización del Gold Layer
 
-Actualmente se conectan dashboards desde:
+✅ Resultados
 
-✅ Databricks SQL Dashboards
+Datos unificados por trabajador, especialidad y turno
+Creación de modelos para análisis de RRHH clínico
+Dashboard visual listo para gestión de personal
 
-⏳ Power BI (en iteración futura)
-
-KPIs iniciales:
-
-KPI	Objetivo
-Distribución de especialidades	Análisis de capacidad
-Staff por franja horaria	Planificación operativa
-Relación sueldo vs. especialidad	Optimización del gasto
-🧩 Próximas Extensiones
-
-✅ Relacionar trabajadores → pacientes → atenciones
-🚧 KPI: productividad por médico
-🚧 Integración historizada de planillas
-🚧 Power BI con DirectQuery
 
 👨‍💻 Autor
 <div align="center">
@@ -156,15 +139,4 @@ Jorge Luis Atalaya Alva
 
 
 
-Data Engineering | Azure Databricks | Delta Lake | CI/CD
 
-</div>
-📝 Licencia
-
-Proyecto bajo licencia MIT.
-
-✅ Resultados
-
-Datos unificados por trabajador, especialidad y turno
-Creación de modelos para análisis de RRHH clínico
-Dashboard visual listo para gestión de personal
