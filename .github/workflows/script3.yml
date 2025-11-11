@@ -17,7 +17,7 @@ jobs:
       run: |
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
-        NOTEBOOK_BASE="/Workspace/Users/jorgluis1402@gmail.com/source_ntbk"
+        NOTEBOOK_BASE="/Workspace/Users/jorgluis1402@hotmail.com/Project/Proceso"
         NOTEBOOKS=("preparacion_ambiente" "extrac_clinic_workers" "extrac_clinic_profession" "extrac_clinic_turn" "Transform" "Load")  # Agrega más según necesitesas
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
