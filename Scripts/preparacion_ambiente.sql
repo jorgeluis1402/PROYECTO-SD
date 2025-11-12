@@ -35,8 +35,13 @@
 
 -- COMMAND ----------
 
+-- MAGIC %python
+-- MAGIC ruta = f"abfss://bronze@{storageName}.dfs.core.windows.net"
+
+-- COMMAND ----------
+
 -- MAGIC %md
--- MAGIC ### Creacion de Catalogos,Esquemas y Volumes
+-- MAGIC ### Creacion de Catalogos,Esquemas 
 
 -- COMMAND ----------
 
@@ -49,6 +54,26 @@ CREATE CATALOG IF NOT EXISTS project_etl;
 create schema if not exists project_etl.bronze;
 create schema if not exists project_etl.silver;
 create schema if not exists project_etl.gold;
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ## Eliminacion tablas Bronze
+
+-- COMMAND ----------
+
+DROP TABLE IF EXISTS project_etl.bronze.workers;
+DROP TABLE IF EXISTS project_etl.bronze.profession;
+DROP TABLE IF EXISTS project_etl.bronze.turn;
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC
+-- MAGIC ## REMOVE DATA (Bronze)
+-- MAGIC dbutils.fs.rm(f"{ruta}/tablas/workers", True)
+-- MAGIC dbutils.fs.rm(f"{ruta}/tablas/profession", True)
+-- MAGIC dbutils.fs.rm(f"{ruta}/tablas/turn", True)
 
 -- COMMAND ----------
 

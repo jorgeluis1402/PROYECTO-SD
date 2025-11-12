@@ -30,10 +30,6 @@ df_clinic_trans.display()
 
 # COMMAND ----------
 
-df_clinic_trans.printSchema()
-
-# COMMAND ----------
-
 df_clinic_update = df_clinic_trans.groupBy(
     "DEPARTAMENTO",
     "CATEGORIA_TURNO",
