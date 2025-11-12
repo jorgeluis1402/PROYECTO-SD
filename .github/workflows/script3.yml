@@ -17,7 +17,11 @@ jobs:
       run: |
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
+<<<<<<< Updated upstream
         NOTEBOOK_BASE="/Workspace/Users/ahuaccachi28@gmail.com/source_ntbk"
+=======
+        NOTEBOOK_BASE="/Workspace/Users/jorgluis1402@hotmail.com/Project/Proceso"
+>>>>>>> Stashed changes
         NOTEBOOKS=("preparacion_ambiente" "extrac_clinic_workers" "extrac_clinic_profession" "extrac_clinic_turn" "Transform" "Load")  # Agrega más según necesitesas
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
